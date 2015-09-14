@@ -1,0 +1,33 @@
+// Place all the styles related to the items controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.inventory_items > li {
+	list-style: none;
+    border: 2px solid cadetblue;
+    width: 80%;
+    padding: 3px 20px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+
+	span {
+
+	}
+}
+
+#item_count {
+	font-size: 20px;
+    font-family: verdana, sans-serif;
+}
+
+.header {
+	border-bottom: 1px solid lightgray;
+    padding: 10px;
+    margin-bottom: 30px;
+    background-color: darkslategrey;
+    color: cornsilk;
+}
+
+.item_form {
+	width: 21%;
+}

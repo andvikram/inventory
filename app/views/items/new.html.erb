@@ -1,0 +1,21 @@
+<br />
+<div class="header">
+	<h2>Inventory: A demo app running on Docker</h2>
+</div>
+
+<div class="item_form">
+	<h4>Add new item to inventory</h4>
+	<hr />
+
+	<%= form_for @item do |f| %>
+		<table>
+			<tr><td style="padding-right: 10px;padding-bottom: 1em;">Name</td><td><%= f.text_field :name %></td></tr>
+			<tr><td style="padding-right: 10px;padding-bottom: 1em;">Description</td><td><%= f.text_field :description %></td></tr>
+			<tr><td style="padding-right: 10px;">Quanity</td><td><%= f.number_field :quantity %></td></tr>
+		</table>
+		<div style="padding-top: 10px; float: right"><%= f.submit "Add Item" %></div>
+	<% end %>
+
+	<br /><br /><hr />
+	<%= link_to 'Back to Index Page', root_path %>
+</div>

@@ -1,0 +1,35 @@
+<br />
+<div class="header">
+	<h2>Inventory: A demo app running on Docker</h2>
+</div>
+
+<div id="container">
+	<div>
+		<%= link_to 'Add New Item', new_item_path %>
+	</div><br />
+
+	<h4>List of items in inventory</h4>
+	<hr />
+
+	<ul class="inventory_items">
+		<% @items.each_with_index do |item, index| %>
+		  <li>
+		  	<span id="item_name">
+		  		<b>Name</b>: <%= item.name %>
+		  	</span>
+		  	&nbsp;&nbsp; | &nbsp;&nbsp;
+		  	<span id="item_desc">
+		  		<b>Description</b>: <%= item.description %>
+		  	</span>
+		  	&nbsp;&nbsp; | &nbsp;&nbsp;
+		  	<span id="item_quantity">
+		  		<b>Quanity</b>: <%= item.quantity %>
+		  	</span>
+		  	&nbsp;&nbsp; | &nbsp;&nbsp;
+		  	<span id="item_delete">
+		  		<%= link_to 'Delete', item.name,  method: :delete, data: { confirm: 'Are you sure?' } %>
+		  	</span>
+		  </li>
+		<% end %>
+	</ul>
+</div>
