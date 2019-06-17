@@ -23,7 +23,7 @@
 
    a) The db deployment yml file
 
-   b) The db service yml file (once step a is ready, you can check with commands)
+   b) The db service yml file. This contains script to grant access to all incoming connections. (once step a is ready, you can check with commands)
 
    c) The app deployment yml file (once step a is ready, you can check with commands)
 
