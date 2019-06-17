@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-app
+  template:
+    metadata:
+      labels:
+        app: inventory-app
+    spec:
+      containers:
+      - name: inventory-app
+        image: andvikram/inventory:latest
+        command: ["/bin/bash"]
+        args: ["-c", "/home/vikram/inventory/init.sh"]
+        env:
+        - name: GITUSER
+          value: "andvikram"
+        - name: GITPASS
+          value: "inc%40gn1to"
+        - name: DBCREATE
+          value: "y"
+        - name: DBMIGRATE
+          value: "y"
+        ports:
+          - containerPort: 3000

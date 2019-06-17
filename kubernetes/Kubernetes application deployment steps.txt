@@ -1,0 +1,118 @@
+1) Install Kubernetes as a multi-node setup (see saved guides or https://vitux.com/install-and-deploy-kubernetes-on-ubuntu/)
+
+2) Install Docker on master and slave nodes
+
+3) Make sure Docker is using systemd
+
+4) Follow the installation steps for Kubernetes
+
+5) Install a network add-on for pod network. Go with Flannel or Weavenet.
+
+6) Make sure the application images are ready (check 'Docker section' below)
+
+7) Create a service as a logical grouping of pods. 
+   With that an application running on one pod can access application on another pod using service name as the host.
+
+8) Install an ingress controller (like NGINX) to create ingress rules that will expose your service to the external world
+
+9) All of these configurations are written in YML files and executed by kubectl
+
+10) Step 7 requires a domain name pointing to the public ip of the slave node where the pod is running
+
+11) In place of step 7, a novice and easy solution is to create a service that is published on the public ip of the node 
+   
+    Use the following commnand:
+    
+    ---> kubectl expose deployment inventory-app --type=NodePort --name=inventory-service
+   
+    This commands creates a new service <inventory-service>. Here <inventory-app> is the name of the metadata in the deployment config file. 
+   
+    You can check the details of the service with the following command:
+    
+    ---> kubectl describe services inventory-service
+
+    This provides the following output:
+    
+    Name:                     inventory-service
+    Namespace:                default
+    Labels:                   <none>
+    Annotations:              <none>
+    Selector:                 app=inventory-app
+    Type:                     NodePort
+    IP:                       10.104.199.131
+    Port:                     <unset>  3000/TCP
+    TargetPort:               3000/TCP
+    NodePort:                 <unset>  31694/TCP
+    Endpoints:                10.244.1.6:3000
+    Session Affinity:         None
+    External Traffic Policy:  Cluster
+    Events:                   <none>
+    
+    
+    The <NodePort> is the port value to use in order to access the application from outside.
+    
+    Use it with the public IP of the slave node where the pod is running: 
+    
+    ---> curl http://<node-public-ip>:<NodePort>
+    
+
+
+--------------------------------------------------------------------
+
+Docker section
+______________
+
+
+(Docker commands) => 
+
+docker run --rm --name=mysql1 -e MYSQL_ROOT_PASSWORD=root -d --mount type=bind,src=c:\Users\vikram\scripts\,dst=/docker-entrypoint-initdb.d/ mysql/mysql-server:5.7
+
+____________________________________________________________________ 
+
+scripts folder to contain a sql file with the following content:
+------------------------------------------------------------------------------------------------- 
+CREATE USER 'user'@'%' IDENTIFIED BY 'user';
+GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+____________________________________________________________________
+
+
+(
+	optionally this script can be run with the mysql command =>
+	--------------------------------------------------------------------------------------------------
+	mysql -u "root" "-proot" "mysql" < "/changes.sql"
+	--------------------------------------------------------------------------------------------------
+)
+
+docker logs mysql1
+
+winpty docker run --rm --name inventory --link mysql1 -p 3000:3000 -it dokker/demo:inventory
+
+OR
+
+docker run --rm --name inventory --link mysql1 -p 3000:3000 -e GITUSER=andvikram -e GITPASS=inc%40gn1to DBCREATE=y -e DBMIGRATE=y -it dokker/demo:inventory
+
+winpty docker exec -it mysql1 bash
+
+docker stop $(docker ps -aq)
+
+
+
+
+--------------------------------------------------------------------
+
+Database section
+________________
+
+
+(on mysql) => 
+
+mysql -u root -p
+
+show databases;
+
+connect mysql;
+
+select User, Host, Grant_priv from user;
+
+
