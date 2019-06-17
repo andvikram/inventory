@@ -8,7 +8,7 @@
 
 5) Install a network add-on for pod network. Go with Flannel or Weavenet.
 
-6) Make sure the application images are ready (check 'Docker section' below)
+6) Make sure the application images are ready. Kubernetes requires them to accessible from an online repository. (check 'Docker section' below)
 
 7) Install an ingress controller (like NGINX) to create ingress rules that will expose your service to the external world
 
