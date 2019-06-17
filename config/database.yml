@@ -4,8 +4,10 @@ development:
   reconnect: false
   database: inventory_development
   pool: 5
-  username: root
-  password: root
+  username: user
+  password: user
+  host: localhost
+  socket: '/tmp/mysql.sock'
 
 test:
   adapter: mysql2
@@ -13,5 +15,7 @@ test:
   reconnect: false
   database: inventory_test
   pool: 5
-  username: root
-  password: root
+  username: user
+  password: user
+  host: localhost
+  socket: '/tmp/mysql.sock'
