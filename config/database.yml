@@ -6,7 +6,7 @@ development:
   pool: 5
   username: user
   password: user
-  host: db-service
+  host: db-service # For kubernetes. This is the name of the service behind which the pod is running that hosts the container running this app.
   socket: '/tmp/mysql.sock'
 
 test:
@@ -17,5 +17,5 @@ test:
   pool: 5
   username: user
   password: user
-  host: db-service
+  host: db-service # For kubernetes. This is the name of the service behind which the pod is running that hosts the container running this app.
   socket: '/tmp/mysql.sock'
