@@ -6,7 +6,7 @@ development:
   pool: 5
   username: user
   password: user
-  host: localhost
+  host: db-service
   socket: '/tmp/mysql.sock'
 
 test:
@@ -17,5 +17,5 @@ test:
   pool: 5
   username: user
   password: user
-  host: localhost
+  host: db-service
   socket: '/tmp/mysql.sock'
