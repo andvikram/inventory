@@ -10,16 +10,35 @@
 
 6) Make sure the application images are ready (check 'Docker section' below)
 
-7) Create a service as a logical grouping of pods. 
+7) Install an ingress controller (like NGINX) to create ingress rules that will expose your service to the external world
+
+   Use the following two commands:
+      
+   ---> kkubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
+
+   ---> kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/cloud-generic.yaml
+
+
+8) Edit and apply the deployment files in the following order:
+
+   a) The db deployment yml file
+
+   b) The db service yml file (once step a is ready, you can check with commands)
+
+   c) The app deployment yml file (once step a is ready, you can check with commands)
+
+   d) The app service yml file (once step c is ready, you can check with commands)
+
+   e) The ingress yml file (once step a is ready, you can check with commands)
+
+9) This will create services as a stable interface of pods (since pods can die and be restarted). 
    With that an application running on one pod can access application on another pod using service name as the host.
 
-8) Install an ingress controller (like NGINX) to create ingress rules that will expose your service to the external world
+10) All of these configurations are written in YML files and executed by kubectl
 
-9) All of these configurations are written in YML files and executed by kubectl
+11) Step 8(e) requires a domain name pointing to the public ip of the slave node where the pod is running
 
-10) Step 7 requires a domain name pointing to the public ip of the slave node where the pod is running
-
-11) In place of step 7, a novice and easy solution is to create a service that is published on the public ip of the node 
+12) In place of step 8(e), a novice and easy solution is to create a service that is published on the public ip of the node 
    
     Use the following commnand:
     
