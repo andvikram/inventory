@@ -19,9 +19,9 @@ spec:
         args: ["-c", "/home/vikram/inventory/init.sh"]
         env:
         - name: GITUSER
-          value: "andvikram"
+          value: "user"
         - name: GITPASS
-          value: "inc%40gn1to"
+          value: "password-with-%40"
         - name: DBCREATE
           value: "y"
         - name: DBMIGRATE
