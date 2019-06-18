@@ -28,3 +28,5 @@ spec:
           value: "y"
         ports:
           - containerPort: 3000
+      nodeSelector:
+        nodetype: app
